@@ -4,12 +4,11 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,12 +21,16 @@ namespace Microsoft.Azure.Devices.E2ETests
 
         //Azure Active Directory authentication authority for public cloud
         private const string AuthenticationAuthorityTemplate = "https://login.windows.net/{0}";
+
         //Azure Log Analytics Authentication token audience
         private const string Audience = "https://api.loganalytics.io/";
+
         //Azure Log Analytics query URL
         private const string QueryUriTemplate = "https://api.loganalytics.io/{0}/workspaces/{1}/query";
+
         //Azure Log Analytics API version
         private const string LogAnalyticsApiVersion = "v1";
+
         //Query template for querying a SecurityIoTRawEvent by device id and raw event id
         private const string RawEventQueryTemplate =
             @"SecurityIoTRawEvent
@@ -47,6 +50,7 @@ namespace Microsoft.Azure.Devices.E2ETests
 
         //These are used in NET451 instead of OperationalInsights SDK
         private readonly HttpClient _client;
+
         private readonly string _queryUri;
 
         public static AzureSecurityCenterForIoTLogAnalyticsClient CreateClient()
