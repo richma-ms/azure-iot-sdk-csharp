@@ -109,6 +109,12 @@ $FarHubName = $HubName + "Far"
 $UploadCertificateName = "group1-certificate"
 $SecretsKeyVaultName = "Secrets-$HubName"
 
+$IOTHUB_X509_PFX_CERTIFICATE = ""
+$DPS_INDIVIDUALX509_PFX_CERTIFICATE = ""
+$DPS_GROUPX509_PFX_CERTIFICATE = ""
+$DPS_GROUPX509_CERTIFICATE_CHAIN = ""
+$DPS_X509_PFX_CERTIFICATE_PASSWORD = ""
+
 ########################################################################################################
 #Install latest version of az cli
 ########################################################################################################
@@ -224,7 +230,7 @@ if($isVerified -eq 'false')
     Write-Host "Verifying certificate uploaded to DPS"
     $etag = az iot dps certificate show -g $ResourceGroup --dps-name $DeviceProvisioningServiceName --certificate-name $UploadCertificateName --query 'etag'
     $verificationCode = az iot dps certificate generate-verification-code -g $ResourceGroup --dps-name $DeviceProvisioningServiceName --certificate-name $UploadCertificateName -e $etag --query 'properties.verificationCode'
-    $verificationCert = dotnet run --project $PathToGroupCertificateVerificationSampleCsprojFolder $PathToGroupPfx testcertificate $verificationCode
+    $verificationCert = dotnet run --project $PathToGroupCertificateVerificationSampleCsprojFolder $PathToGroupPfx $DPS_X509_PFX_CERTIFICATE_PASSWORD $verificationCode
     $currentDir = Get-Location
     $PathToVerificationCertificateCer = Join-Path -Path $currentDir -ChildPath "verificationCertificate.cer"
     $etag = az iot dps certificate show -g $ResourceGroup --dps-name $DeviceProvisioningServiceName --certificate-name $UploadCertificateName --query 'etag'
@@ -305,12 +311,6 @@ $fileContentB64String = [System.Convert]::ToBase64String($fileContent);
 
 Write-Host "Successfully fetched the certificate bytes ... removing the cert file from the disk"
 Remove-Item -r .\selfSignedCert
-
-$IOTHUB_X509_PFX_CERTIFICATE = ""
-$DPS_INDIVIDUALX509_PFX_CERTIFICATE = ""
-$DPS_GROUPX509_PFX_CERTIFICATE = ""
-$DPS_GROUPX509_CERTIFICATE_CHAIN = ""
-$DPS_X509_PFX_CERTIFICATE_PASSWORD = ""
 
 #################################################################################################################################################
 # Generate a Config file with all the Environment vairables that need to be added before running the tests
