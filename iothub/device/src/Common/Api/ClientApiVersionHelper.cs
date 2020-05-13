@@ -6,7 +6,7 @@ namespace Microsoft.Azure.Devices.Client
     internal class ClientApiVersionHelper
     {
         internal const string ApiVersionQueryPrefix = "api-version=";
-        internal const string ApiVersionLatest = "2018-06-30";
+        internal const string ApiVersionLatest = "2020-06-30-preview";
 
         public const string ApiVersionString = ApiVersionLatest;
         public const string ApiVersionQueryString = ApiVersionQueryPrefix + ApiVersionString;

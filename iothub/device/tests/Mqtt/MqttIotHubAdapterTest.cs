@@ -5,7 +5,6 @@ namespace Microsoft.Azure.Devices.Client.Test.Mqtt
 {
     using DotNetty.Codecs.Mqtt.Packets;
     using DotNetty.Transport.Channels;
-    using FluentAssertions;
     using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
@@ -129,7 +128,7 @@ namespace Microsoft.Azure.Devices.Client.Test.Mqtt
             mqttIotHubAdapter.ChannelActive(channelHandlerContext.Object);
 
             // Assert: the auth chain should be part of the username
-            ConnectPacket connectPacket = messages.First().As<ConnectPacket>();
+            ConnectPacket connectPacket = (ConnectPacket)messages.First();
             NameValueCollection queryParams = System.Web.HttpUtility.ParseQueryString(connectPacket.Username);
             Assert.AreEqual(authChain, queryParams.Get("auth-chain"));
         }
