@@ -8,6 +8,12 @@ using Newtonsoft.Json.Converters;
 
 namespace Microsoft.Azure.Devices
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Azure.Devices.Shared;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
     /// <summary>
     /// Contains Device properties and their accessors.
     /// </summary>
@@ -110,5 +116,11 @@ namespace Microsoft.Azure.Devices
         /// </summary>
         [JsonProperty(PropertyName = "deviceScope", NullValueHandling = NullValueHandling.Ignore)]
         public virtual string Scope { get; set; }
+
+        /// <summary>
+        /// ParentScopes
+        /// </summary>
+        [JsonProperty(PropertyName = "parentScopes", NullValueHandling = NullValueHandling.Ignore)]
+        public virtual IEnumerable<string> ParentScopes { get; set; }
     }
 }

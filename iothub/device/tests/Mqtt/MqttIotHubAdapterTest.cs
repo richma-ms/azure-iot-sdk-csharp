@@ -5,7 +5,6 @@ namespace Microsoft.Azure.Devices.Client.Test.Mqtt
 {
     using DotNetty.Codecs.Mqtt.Packets;
     using DotNetty.Transport.Channels;
-    using FluentAssertions;
     using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;

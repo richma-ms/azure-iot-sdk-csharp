@@ -6,11 +6,11 @@ namespace Microsoft.Azure.Devices.Client
     internal class ClientApiVersionHelper
     {
         internal const string ApiVersionQueryPrefix = "api-version=";
-        internal const string ApiVersionLatest = "2019-10-01";
+        internal const string ApiVersionLatest = "2020-06-30-preview";
 
         // The preview API version has been added to enable support for plug and play features.
         // This will be removed once the plug and play service goes GA.
-        internal const string ApiVersionPreview = "2020-05-31-preview";
+        internal const string ApiVersionPreview = "2020-06-30-preview";
 
         public const string ApiVersionString = ApiVersionLatest;
         public const string ApiVersionQueryStringLatest = ApiVersionQueryPrefix + ApiVersionString;
