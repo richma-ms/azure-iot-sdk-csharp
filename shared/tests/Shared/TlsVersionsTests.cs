@@ -15,14 +15,14 @@ namespace Microsoft.Azure.Devices.Shared.Tests
         public void MinimumTlsVersions_DefaultsToTls12()
         {
             // assert
-            new TlsVersions().MinimumTlsVersions.Should().Be(SslProtocols.Tls12);
+            TlsVersions.Instance.MinimumTlsVersions.Should().Be(SslProtocols.Tls12);
         }
 
         [Fact]
         public void Preferred_DefaultsToNone()
         {
             // assert
-            new TlsVersions().Preferred.Should().Be(SslProtocols.None);
+            TlsVersions.Instance.Preferred.Should().Be(SslProtocols.None);
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Microsoft.Azure.Devices.Shared.Tests
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
 
             // act
-            new TlsVersions().SetLegacyAcceptableVersions();
+            TlsVersions.Instance.SetLegacyAcceptableVersions();
 
             // assert
             ServicePointManager.SecurityProtocol.Should().Be(SecurityProtocolType.Tls12);
@@ -51,7 +51,7 @@ namespace Microsoft.Azure.Devices.Shared.Tests
         public void SetMinimumTlsVersions_CanSetToNone()
         {
             // arrange
-            var tlsVersions = new TlsVersions();
+            var tlsVersions = TlsVersions.Instance;
 
             // Need to change it to something other than none to know that it can be set back
             tlsVersions.SetMinimumTlsVersions(SslProtocols.Tls12);
@@ -68,7 +68,7 @@ namespace Microsoft.Azure.Devices.Shared.Tests
         public void SetMinimumTlsVersions_CanSetToTls12()
         {
             // arrange
-            var tlsVersions = new TlsVersions();
+            var tlsVersions = TlsVersions.Instance;
             const SslProtocols expected = SslProtocols.Tls12;
 
             // act
@@ -87,7 +87,7 @@ namespace Microsoft.Azure.Devices.Shared.Tests
         public void SetMinimumTlsVersions_CanSetToOlderTls(SslProtocols protocol)
         {
             // arrange
-            var tlsVersions = new TlsVersions();
+            var tlsVersions = TlsVersions.Instance;
             SslProtocols expected = protocol | SslProtocols.Tls12;
 
             // act
@@ -107,7 +107,7 @@ namespace Microsoft.Azure.Devices.Shared.Tests
         public void SetMinimumTlsVersions_CannotSetOther(SslProtocols protocol)
         {
             // arrange
-            var tlsVersions = new TlsVersions();
+            var tlsVersions = TlsVersions.Instance;
 
             // act
             tlsVersions.SetMinimumTlsVersions(protocol);
