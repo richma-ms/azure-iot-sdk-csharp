@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.22.0</Version>
+    <Version>1.22.2-NestedEdge-1</Version>
     <Title>Microsoft Azure IoT Service Client SDK</Title>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
